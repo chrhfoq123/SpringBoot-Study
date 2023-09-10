@@ -1,5 +1,7 @@
 package com.example.member.entity;
 
+import com.example.member.dto.MemberDTO;
+import com.example.member.repository.MemberRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,4 +25,13 @@ public class MemberEntity {
     @Column
     private String memberName;
 
+    // dto -> entity변환
+    public static MemberEntity toMemberEntity(MemberDTO memberDTO){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+
+        return memberEntity;
+    }
 }
