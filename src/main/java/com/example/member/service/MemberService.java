@@ -56,4 +56,27 @@ public class MemberService {
 
         return memberDTOList;
     }
+
+    public MemberDTO findById(Long id) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if(optionalMemberEntity.isPresent()){
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        }else{
+            return null;
+        }
+    }
+
+    public MemberDTO updateForm(String myEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
+        if(optionalMemberEntity.isPresent()){
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        }else{
+            return null;
+        }
+    }
+
+    public void update(MemberDTO memberDTO) {
+        //save()는 id가 없으면 insert 쿼리, id가 있으면 update 쿼리를 날려줌
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+    }
 }
