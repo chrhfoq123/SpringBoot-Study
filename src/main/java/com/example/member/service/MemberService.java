@@ -79,4 +79,8 @@ public class MemberService {
         //save()는 id가 없으면 insert 쿼리, id가 있으면 update 쿼리를 날려줌
         memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
     }
+
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
 }
